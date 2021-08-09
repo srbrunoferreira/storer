@@ -16,7 +16,7 @@ const Text = (props) => {
 
   switch (props.size) {
     case 'sm':
-      size = '0.75em'
+      size = '0.78em'
       break
     case 'lg':
       size = '1.5em'
@@ -26,12 +26,15 @@ const Text = (props) => {
       break
   }
 
+  const classes = style.text + ' ' + props.className
+
   return (
-    <p className={style.text} style={{ fontSize: size, fontWeight: fontWeight }}>{props.text}</p>
+    <p className={classes} style={{ fontSize: size, fontWeight: fontWeight }}>{props.text}</p>
   )
 }
 
 Text.propTypes = {
+  className: PropTypes.string,
   text: PropTypes.string.isRequired,
   size: PropTypes.string,
   bold: PropTypes.bool
