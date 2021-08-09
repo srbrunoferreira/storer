@@ -3,11 +3,13 @@ import { makeStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 
 import './App.css'
+import ItemsContainer from './components/ItemsContainer'
 
 const useStyles = makeStyles((theme) => ({
   container: {
     backgroundColor: '#040111',
-    height: '100vh'
+    height: '100vh',
+    padding: '15px'
   },
   subContainer: {
     justifyContent: 'center',
@@ -15,13 +17,6 @@ const useStyles = makeStyles((theme) => ({
   },
   white: {
     color: 'white'
-  },
-  itemsContainer: {
-    width: '390px',
-    height: '530px',
-    backgroundColor: 'rgba(255, 255, 255, 0.92)',
-    borderRadius: '3px',
-    padding: '10px'
   }
 }))
 
@@ -30,10 +25,12 @@ function App () {
 
   return (
     <Grid container className={classes.container}>
-      <Grid className={classes.subContainer} container xs>
+      <Grid item className={classes.subContainer} container xs>
         <img src="/logo.svg" width="190px" />
       </Grid>
-      <Grid className={classes.subContainer} container xs></Grid>
+      <Grid item className={classes.subContainer} container xs>
+        <ItemsContainer />
+      </Grid>
     </Grid>
   )
 }
