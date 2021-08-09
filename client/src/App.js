@@ -6,6 +6,7 @@ import { Box } from '@material-ui/core'
 import './App.css'
 import ItemsContainer from './components/ItemsContainer'
 import Text from './components/Text'
+import Input from './components/Input'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -58,6 +59,8 @@ function App () {
           </Box>
 
           <ItemsContainer />
+
+          <Input />
         </Box>
 
       </Grid>
