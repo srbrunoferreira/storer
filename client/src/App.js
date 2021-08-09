@@ -53,8 +53,13 @@ function App () {
 
         <Box className={classes.contentWrapper}>
           <Box className={classes.header}>
-            <Text text="Olá, " size="lg" />
-            <Text text="Bruno" bold size="lg" />
+            <Grid container direction="row" justifyContent="space-between" alignItems="center">
+              <Box>
+                <Text text="Olá, " size="lg" />
+                <Text text="Bruno" bold size="lg" />
+              </Box>
+                <Text text="3 Items" size="sm" />
+            </Grid>
           </Box>
 
           <ItemsContainer />
