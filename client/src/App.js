@@ -6,6 +6,7 @@ import { Box } from '@material-ui/core'
 import './App.css'
 import ItemsContainer from './components/ItemsContainer'
 import Text from './components/Text'
+import Input from './components/Input'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -21,10 +22,9 @@ const useStyles = makeStyles((theme) => ({
   },
   contentWrapper: {
     width: '390px',
-    height: '530px',
     backgroundColor: 'rgba(255, 255, 255, 0.92)',
     borderRadius: '3px',
-    padding: '10px',
+    padding: '15px',
     textAlign: 'left'
   },
   header: {
@@ -41,7 +41,7 @@ function App () {
     <Grid
       className={classes.container}
       container
-      justifyContent="center"
+      justifyContent="space-around"
       alignItems="center"
     >
 
@@ -58,6 +58,8 @@ function App () {
           </Box>
 
           <ItemsContainer />
+
+          <Input />
         </Box>
 
       </Grid>
