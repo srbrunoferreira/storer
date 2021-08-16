@@ -36,3 +36,6 @@
 | GET  | /tasks      | index  | photo.getAll   |
 | GET  | /tasks/{id} | show   | photo.getPhoto |
 | POST | /tasks      | create | photo.create   |
+
+## Front-end print screen
+![Interface](print.png)
