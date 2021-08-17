@@ -2,13 +2,14 @@
 
 import express from 'express'
 import mongoose from 'mongoose'
-import { DATABASE_USER, DATABASE_PASSWD } from './config.js'
 
+import { DATABASE, DATABASE_USER, DATABASE_PASSWD } from './config.js'
+import taskSchema from './models/task.js'
 import taskRoute from './routes/task_route.js'
 
 // Database connection
 mongoose.connect(
-  `mongodb+srv://${DATABASE_USER}:${DATABASE_PASSWD}@cluster0.ipipi.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
+  `mongodb+srv://${DATABASE_USER}:${DATABASE_PASSWD}@cluster0.ipipi.mongodb.net/${DATABASE}?retryWrites=true&w=majority`,
   {
     useNewUrlParser: true,
     useFindAndModify: false,
