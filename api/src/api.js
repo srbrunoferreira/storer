@@ -1,9 +1,26 @@
 'use strict'
 
 import express from 'express'
+import mongoose from 'mongoose'
+import { DATABASE_USER, DATABASE_PASSWD } from './config.js'
 
 import taskRoute from './routes/task_route.js'
 
+// Database connection
+mongoose.connect(
+  `mongodb+srv://${DATABASE_USER}:${DATABASE_PASSWD}@cluster0.ipipi.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
+  {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true
+  }
+)
+
+mongoose.connection.on('connected', () => {
+  console.log('Connected to the database')
+})
+
+// Api settings
 const api = express()
 
 api.use(express.json())
