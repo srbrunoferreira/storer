@@ -5,7 +5,7 @@ import { Box } from '@material-ui/core'
 import axios from 'axios'
 
 import './App.css'
-import ItemsContainer from './components/ItemsContainer'
+import TasksList from './components/TasksList'
 import Text from './components/Text'
 import Input from './components/Input'
 
@@ -79,7 +79,7 @@ function App () {
             </Grid>
           </Box>
 
-          <ItemsContainer />
+          <TasksList />
 
           <Input callback={handleTaskSubmit} />
         </Box>

@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const ItemsContainer = () => {
+const TasksList = () => {
   const style = useStyles()
   const [tasks, setTasks] = useState([])
   const tasksEndRef = useRef(null)
@@ -50,4 +50,4 @@ const ItemsContainer = () => {
   )
 }
 
-export default ItemsContainer
+export default TasksList
