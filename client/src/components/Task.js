@@ -29,7 +29,6 @@ const Task = ({ date, text }) => {
 }
 
 Task.propTypes = {
-  key: PropTypes.number.isRequired,
   date: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired
 }
