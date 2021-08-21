@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Box } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import Item from './Item'
+import axios from 'axios'
 
 // import Item from './Item'
 
@@ -13,35 +14,38 @@ const useStyles = makeStyles((theme) => ({
     padding: '15px',
     marginTop: '15px',
     borderRadius: '3px',
-    overflow: 'auto'
+    overflowY: 'scroll'
   }
 }))
 
 const ItemsContainer = () => {
   const style = useStyles()
+  const [tasks, setTasks] = useState([])
+  const tasksEndRef = useRef(null)
 
-  const items = [
-    {
-      date: '08.08.21',
-      text: 'Aprendendo React'
-    },
-    {
-      date: '12.08.21',
-      text: 'Aprendendo Laravel'
-    },
-    {
-      date: '25.08.21',
-      text: 'Aprendendo NodeJS'
-    }
-  ]
+  // Scrolls to the bottom of the container.
+  useEffect(() => tasksEndRef.current?.scrollIntoView({ behavior: 'smooth' }), [tasks])
+
+  useEffect(() =>
+    (async () => {
+      const { data } = await axios('http://localhost:3000/tasks')
+      setTasks(data.tasks)
+    })()
+  , [])
+
+  console.dir(tasks)
 
   return (
     <Box className={style.container}>
       {
-        items.map((item, index) => {
-          return <Item key={index} date={item.date} text={item.text} />
+        tasks.map((item, index) => {
+          let date = item.createdAt.split('T')[0]
+          date = date.split('-')
+          date = date[2] + '.' + date[1]
+          return <Item key={index} date={date} text={item.text} />
         })
       }
+      <div ref={tasksEndRef} />
     </Box>
   )
 }
