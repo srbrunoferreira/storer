@@ -23,13 +23,12 @@ export const createTask = (req, res) => {
 
     validator.hasMinLen(data.status, 4, 'O status deve ter no mínimo quatro letras.')
     validator.hasMinLen(data.text, 5, 'A descrição da task deve ter no mínimero cinco caracteres.')
+    validator.isRequired(data.createdAt, 'A data de criação é necessária.')
 
     if (!validator.isValid()) {
       res.status(400).send(validator.errors()).end()
       return
     }
-
-    data.createdAt = new Date().toISOString()
 
     serviceCreateTask({
       status: data.status,
