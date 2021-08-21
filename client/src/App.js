@@ -2,12 +2,10 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import { Box } from '@material-ui/core'
-import axios from 'axios'
 
 import './App.css'
 import TasksList from './components/TasksList'
 import Text from './components/Text'
-import Input from './components/Input'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -38,22 +36,6 @@ const useStyles = makeStyles((theme) => ({
 function App () {
   const classes = useStyles()
 
-  function handleTaskSubmit (taskText) {
-    if (taskText.length === 0) { console.log('O input deve ser preenchido.'); return }
-    axios({
-      method: 'POST',
-      url: 'http://localhost:3000/tasks',
-      headers: { 'Content-Type': 'application/json' },
-      data: { status: 'done', text: taskText }
-    })
-      .then((res) => {
-        console.log(res)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
-
   return (
     <Grid
       className={classes.container}
@@ -80,8 +62,6 @@ function App () {
           </Box>
 
           <TasksList />
-
-          <Input callback={handleTaskSubmit} />
         </Box>
 
       </Grid>

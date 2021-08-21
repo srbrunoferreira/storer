@@ -18,12 +18,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const Task = (props) => {
+const Task = ({ date, text }) => {
   const style = useStyles()
   return (
     <Box className={style.item}>
-      <Text className={style.itemDate} text={props.date} bold size="sm" />
-      <Text text={props.text} size="sm" />
+      <Text className={style.itemDate} text={date} bold size="sm" />
+      <Text text={text} size="sm" />
     </Box>
   )
 }
