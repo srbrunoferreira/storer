@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Box } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import Item from './Item'
+import Task from './Task'
 import axios from 'axios'
 
-// import Item from './Item'
+// import Task from './Task'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -42,7 +42,7 @@ const TasksList = () => {
           let date = item.createdAt.split('T')[0]
           date = date.split('-')
           date = date[2] + '.' + date[1]
-          return <Item key={index} date={date} text={item.text} />
+          return <Task key={index} date={date} text={item.text} />
         })
       }
       <div ref={tasksEndRef} />

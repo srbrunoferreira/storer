@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const Item = (props) => {
+const Task = (props) => {
   const style = useStyles()
   return (
     <Box className={style.item}>
@@ -28,10 +28,10 @@ const Item = (props) => {
   )
 }
 
-Item.propTypes = {
+Task.propTypes = {
   key: PropTypes.number.isRequired,
   date: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired
 }
 
-export default Item
+export default Task
