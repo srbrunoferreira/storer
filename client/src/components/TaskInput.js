@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const Input = (props) => {
+const TaskInput = (props) => {
   const style = useStyles()
   const textInput = React.createRef()
 
@@ -49,8 +49,8 @@ const Input = (props) => {
   )
 }
 
-Input.propTypes = {
+TaskInput.propTypes = {
   callback: PropTypes.func.isRequired
 }
 
-export default Input
+export default TaskInput
