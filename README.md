@@ -1,4 +1,10 @@
 # storer
+#### Adjustments and improvements
+
+This project is still under development and will receive more features and improvements in the next versions that will focus on:
+
+- [x] Axios global settings
+
 # Front-end
 
 ## React dependencies
@@ -39,3 +45,4 @@
 
 ## Front-end print screen
 ![Interface](print.png)
+
