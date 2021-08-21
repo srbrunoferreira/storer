@@ -1,10 +1,15 @@
 'use strict'
 
-import { serviceCreateTask } from '../services/task_service.js'
+import { serviceCreateTask, serviceGetTasks } from '../services/task_service.js'
 import ValidationContract from '../validators/fluent-validator.js'
 
 export const getTasks = (req, res) => {
-  res.status(200).send({ status: 'It"s working', func: 'getTasks' })
+  serviceGetTasks()
+    .then((tasks) => res.status(200).send({ tasks: tasks }))
+    .catch((err) => {
+      console.log(err)
+      res.status(500).send({ error: err })
+    })
 }
 
 export const getTask = (req, res) => {
