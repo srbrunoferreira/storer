@@ -1,6 +1,6 @@
 'use strict'
 
-import { serviceCreateTask, serviceGetTasks } from '../services/task_service.js'
+import { serviceCreateTask, serviceDeleteTask, serviceGetTasks } from '../services/task_service.js'
 import ValidationContract from '../validators/fluent-validator.js'
 
 export const getTasks = (req, res) => {
@@ -43,5 +43,26 @@ export const createTask = (req, res) => {
       })
   } catch (e) {
     res.status(500).send({ msg: 'Ocorreu um erro e a task não pôde ser criada.' })
+  }
+}
+
+export const deleteTask = (req, res) => {
+  const validator = new ValidationContract()
+
+  validator.isRequired(req.params.id, 'O id da task é obrigatório.')
+  validator.hasMinLen(req.params.id, 12, 'O id é inválido.')
+
+  if (!validator.isValid()) res.status(400).send({ error: validator.errors() }).end()
+
+  try {
+    serviceDeleteTask(req.params.id)
+      .then((result) => {
+        res.status(200).send({ msg: 'Task deletada com sucesso', res: result })
+      })
+      .catch((err) => {
+        res.status(500).send({ msg: 'Ocorreu um erro e a task não pôde ser deletada. CATCH', error: err })
+      })
+  } catch (err) {
+    res.status(500).send({ msg: 'Ocorreu um erro e a task não pôde ser deletada.', error: err })
   }
 }

@@ -14,4 +14,9 @@ export const serviceCreateTask = async (data) => {
   return '_id' in result
 }
 
+export const serviceDeleteTask = async (taskId) => {
+  await Task.findByIdAndDelete(taskId)
+  return true
+}
+
 export default { serviceCreateTask }
