@@ -11,7 +11,7 @@ export const serviceCreateTask = async (data) => {
   const task = new Task(data)
   const result = await task.save()
 
-  return '_id' in result
+  return { status: true, id: result._id }
 }
 
 export const serviceDeleteTask = async (taskId) => {

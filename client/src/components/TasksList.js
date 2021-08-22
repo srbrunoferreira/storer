@@ -49,6 +49,7 @@ const TasksList = () => {
       data: newTask
     })
       .then(res => {
+        newTask._id = res.data.id
         setTasks([newTask, ...tasks])
       })
       .catch(err => console.log(err))

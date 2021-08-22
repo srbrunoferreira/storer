@@ -35,8 +35,8 @@ export const createTask = (req, res) => {
       text: data.text,
       createdAt: data.createdAt
     })
-      .then(() => {
-        res.status(201).send({ msg: 'Task criada com sucesso' })
+      .then((result) => {
+        res.status(201).send({ msg: 'Task criada com sucesso', id: result.id })
       })
       .catch((e) => {
         res.status(500).send({ msg: 'Ocorreu um erro e a task não pôde ser criada.' })
