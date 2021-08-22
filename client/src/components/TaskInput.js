@@ -32,25 +32,29 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const TaskInput = (props) => {
+const TaskInput = ({ addTaskFunc }) => {
   const style = useStyles()
   const textInput = React.createRef()
 
   function handleInput () {
     const taskText = textInput.current.value
-    if (taskText.length > 0) { props.callback(taskText) }
+    if (!taskText.length > 0) { return }
+    addTaskFunc(taskText)
+    textInput.current.value = ''
   }
+
+  const handleKeyPress = (event) => { if (event.key === 'Enter') handleInput() }
 
   return (
     <Grid container justifyContent="space-between" alignItems="center" className={style.container}>
-      <input className={style.input} ref={textInput} type="text" maxLength="255" placeholder="Adicionar novo item" />
+      <input className={style.input} ref={textInput} onKeyPress={handleKeyPress} type="text" maxLength="255" placeholder="Adicionar novo item" />
       <img onClick={handleInput} src="/send.svg" className={style.img} />
     </Grid>
   )
 }
 
 TaskInput.propTypes = {
-  callback: PropTypes.func.isRequired
+  addTaskFunc: PropTypes.func.isRequired
 }
 
 export default TaskInput

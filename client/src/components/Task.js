@@ -4,6 +4,7 @@ import { PropTypes } from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
 
 import Text from './Text'
+import { formatTaskDate } from '../helpers/helpers'
 
 const useStyles = makeStyles((theme) => ({
   item: {
@@ -18,19 +19,19 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const Task = ({ date, text }) => {
+const Task = ({ tasks }) => {
   const style = useStyles()
-  return (
-    <Box className={style.item}>
-      <Text className={style.itemDate} text={date} bold size="sm" />
-      <Text text={text} size="sm" />
+
+  return tasks.map((task, index) => (
+    <Box className={style.item} key={index}>
+      <Text className={style.itemDate} text={formatTaskDate(task.createdAt)} bold size="sm" />
+      <Text text={task.text} size="sm" />
     </Box>
-  )
+  ))
 }
 
 Task.propTypes = {
-  date: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired
+  tasks: PropTypes.array.isRequired
 }
 
 export default Task

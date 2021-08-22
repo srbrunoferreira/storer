@@ -1,11 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import Task from './Task'
 import TaskInput from './TaskInput'
 import axios from 'axios'
-
-// import Task from './Task'
+import { getIsoDate } from '../helpers/helpers'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -15,48 +14,48 @@ const useStyles = makeStyles((theme) => ({
     padding: '15px',
     marginTop: '15px',
     borderRadius: '3px',
-    overflowY: 'scroll'
+    overflowY: 'scroll',
+    display: 'flex',
+    flexDirection: 'column-reverse'
   }
 }))
 
 const TasksList = () => {
   const style = useStyles()
   const [tasks, setTasks] = useState([])
-  const tasksEndRef = useRef(null)
 
   useEffect(() =>
     (async () => {
-      const { data } = await axios('http://localhost:3000/tasks')
-      setTasks(data.tasks)
+      await axios('http://localhost:3000/tasks')
+        .then(res => {
+          setTasks(res.data.tasks.reverse())
+        })
     })()
   , [])
 
   const addTask = (taskText) => {
     if (taskText.length === 0) { console.log('O input deve ser preenchido.'); return }
+
+    const newTask = { status: 'done', text: taskText, createdAt: getIsoDate() }
+
     axios({
       method: 'POST',
       url: 'http://localhost:3000/tasks',
       headers: { 'Content-Type': 'application/json' },
-      data: { status: 'done', text: taskText }
+      data: newTask
     })
-      .then(res => console.log(res))
+      .then(res => {
+        setTasks([newTask, ...tasks])
+      })
       .catch(err => console.log(err))
   }
 
   return (
     <>
       <Box className={style.container}>
-        {
-          tasks.map((item, index) => {
-            let date = item.createdAt.split('T')[0]
-            date = date.split('-')
-            date = date[2] + '.' + date[1]
-            return <Task key={index} date={date} text={item.text} />
-          })
-        }
-        <div ref={tasksEndRef} />
+        <Task tasks={tasks} />
       </Box>
-      <TaskInput callback={addTask} />
+      <TaskInput addTaskFunc={addTask} />
     </>
   )
 }
