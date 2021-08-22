@@ -54,11 +54,21 @@ const TasksList = () => {
       .catch(err => console.log(err))
   }
 
+  const deleteTask = (taskId) => {
+    axios({
+      method: 'DELETE',
+      url: 'http://localhost:3000/tasks/' + taskId
+    })
+      .then(() => {
+        setTasks([...tasks].filter(task => task._id !== taskId))
+      })
+  }
+
   return (
     <>
       <Box className={style.container}>
         <List className={style.tasksList} ref={taskListRef}>
-          <Task tasks={tasks} />
+          <Task tasks={tasks} deleteTaskFunc={deleteTask} />
         </List>
       </Box>
       <TaskInput addTaskFunc={addTask} />

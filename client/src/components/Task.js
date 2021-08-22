@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const Task = ({ tasks }) => {
+const Task = ({ tasks, deleteTaskFunc }) => {
   const style = useStyles()
 
   return tasks.map((task, index) => (
@@ -43,7 +43,7 @@ const Task = ({ tasks }) => {
         secondary={<Text className={style.createdAt} text={formatTaskDate(task.createdAt)}/>}
       />
       <ListItemIcon className={style.iconsContainer}>
-        <DeleteIcon className={style.icon} />
+        <DeleteIcon className={style.icon} onClick={() => deleteTaskFunc(task._id)} />
         <EditIcon className={style.icon} />
       </ListItemIcon>
     </ListItem>
@@ -51,7 +51,8 @@ const Task = ({ tasks }) => {
 }
 
 Task.propTypes = {
-  tasks: PropTypes.array.isRequired
+  tasks: PropTypes.array.isRequired,
+  deleteTaskFunc: PropTypes.func.isRequired
 }
 
 export default Task
