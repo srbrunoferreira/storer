@@ -3,7 +3,9 @@
 
 This project is still under development and will receive more features and improvements in the next versions that will focus on:
 
-- [x] Axios global settings
+- [ ] Axios global settings
+  - [ ] https://github.com/axios/axios#config-defaults
+  - [ ] https://stackoverflow.com/a/51795582/14839095
 
 # Front-end
 
