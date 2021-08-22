@@ -5,11 +5,16 @@ import { PropTypes } from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
 
 import { formatTaskDate } from '../helpers/helpers'
+import Text from './Text'
 
 const useStyles = makeStyles((theme) => ({
   text: {
     color: '#040111',
-    fontSize: '14px !important'
+    fontSize: '0.92em'
+  },
+  createdAt: {
+    display: 'block',
+    marginTop: '8px'
   },
   iconsContainer: {
     display: 'flex',
@@ -30,11 +35,12 @@ const Task = ({ tasks }) => {
   const style = useStyles()
 
   return tasks.map((task, index) => (
-    <ListItem key={index}>
+    <ListItem className={style.taskContainer} key={index} divider>
       <ListItemText
         className={style.text}
+        disableTypography
         primary={task.text.length > 120 ? task.text.substr(0, 120) + '...' : task.text}
-        secondary={formatTaskDate(task.createdAt)}
+        secondary={<Text className={style.createdAt} text={formatTaskDate(task.createdAt)}/>}
       />
       <ListItemIcon className={style.iconsContainer}>
         <DeleteIcon className={style.icon} />
