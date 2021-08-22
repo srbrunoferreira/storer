@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { Box } from '@material-ui/core'
+import React, { useEffect, useRef, useState } from 'react'
+import { Box, List } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import Task from './Task'
 import TaskInput from './TaskInput'
@@ -9,20 +9,24 @@ import { getIsoDate } from '../helpers/helpers'
 const useStyles = makeStyles((theme) => ({
   container: {
     width: '100%',
-    height: '360px',
+    height: '440px',
     backgroundColor: '#EFEFEF',
     padding: '15px',
     marginTop: '15px',
-    borderRadius: '3px',
+    borderRadius: '3px'
+  },
+  tasksList: {
     overflowY: 'scroll',
     display: 'flex',
-    flexDirection: 'column-reverse'
+    flexDirection: 'column-reverse',
+    maxHeight: '100%'
   }
 }))
 
 const TasksList = () => {
   const style = useStyles()
   const [tasks, setTasks] = useState([])
+  const taskListRef = useRef()
 
   useEffect(() =>
     (async () => {
@@ -53,7 +57,9 @@ const TasksList = () => {
   return (
     <>
       <Box className={style.container}>
-        <Task tasks={tasks} />
+        <List className={style.tasksList} ref={taskListRef}>
+          <Task tasks={tasks} />
+        </List>
       </Box>
       <TaskInput addTaskFunc={addTask} />
     </>

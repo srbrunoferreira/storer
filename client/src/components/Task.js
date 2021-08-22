@@ -1,21 +1,28 @@
 import React from 'react'
-import { Box } from '@material-ui/core'
+import { ListItem, ListItemText, ListItemIcon } from '@material-ui/core'
+import { Delete as DeleteIcon, Edit as EditIcon } from '@material-ui/icons'
 import { PropTypes } from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
 
-import Text from './Text'
 import { formatTaskDate } from '../helpers/helpers'
 
 const useStyles = makeStyles((theme) => ({
-  item: {
-    backgroundColor: '#F4F4F4',
-    marginTop: '15px',
-    padding: '15px',
-    paddingLeft: '8px',
-    paddingRight: '8px'
+  text: {
+    color: '#040111',
+    fontSize: '14px !important'
   },
-  itemDate: {
-    marginRight: '12px'
+  iconsContainer: {
+    display: 'flex',
+    justifyContent: 'space-around'
+  },
+  icon: {
+    color: '#D2D2D2',
+    fontSize: '21px',
+    transition: 'color 0.2s ease',
+    cursor: 'pointer',
+    '&:hover': {
+      color: '#969696'
+    }
   }
 }))
 
@@ -23,10 +30,17 @@ const Task = ({ tasks }) => {
   const style = useStyles()
 
   return tasks.map((task, index) => (
-    <Box className={style.item} key={index}>
-      <Text className={style.itemDate} text={formatTaskDate(task.createdAt)} bold size="sm" />
-      <Text text={task.text} size="sm" />
-    </Box>
+    <ListItem key={index}>
+      <ListItemText
+        className={style.text}
+        primary={task.text.length > 120 ? task.text.substr(0, 120) + '...' : task.text}
+        secondary={formatTaskDate(task.createdAt)}
+      />
+      <ListItemIcon className={style.iconsContainer}>
+        <DeleteIcon className={style.icon} />
+        <EditIcon className={style.icon} />
+      </ListItemIcon>
+    </ListItem>
   ))
 }
 
