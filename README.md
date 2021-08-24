@@ -7,6 +7,11 @@ This project is still under development and will receive more features and impro
   - [ ] https://github.com/axios/axios#config-defaults
   - [ ] https://stackoverflow.com/a/51795582/14839095
 
+# Functionalities
+
+* Create task
+* Delete task
+
 # Front-end
 
 ## React dependencies
