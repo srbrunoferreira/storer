@@ -5,6 +5,7 @@ import Task from './Task'
 import TaskInput from './TaskInput'
 import axios from 'axios'
 import { getIsoDate } from '../helpers/helpers'
+import { PropTypes } from 'prop-types'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const TasksList = () => {
+const TasksList = ({ setTasksCount }) => {
   const style = useStyles()
   const [tasks, setTasks] = useState([])
   const taskListRef = useRef()
@@ -35,6 +36,7 @@ const TasksList = () => {
       await axios('http://localhost:3000/tasks')
         .then(res => {
           setTasks(res.data.tasks.reverse())
+          setTasksCount(res.data.tasks.length)
         })
     })()
   , [])
@@ -53,6 +55,7 @@ const TasksList = () => {
       .then(res => {
         newTask._id = res.data.id
         setTasks([newTask, ...tasks])
+        setTasksCount(tasks.length + 1)
       })
       .catch(err => console.log(err))
   }
@@ -64,6 +67,7 @@ const TasksList = () => {
     })
       .then(() => {
         setTasks([...tasks].filter(task => task._id !== taskId))
+        setTasksCount(tasks.length - 1)
       })
   }
 
@@ -77,6 +81,10 @@ const TasksList = () => {
       <TaskInput addTaskFunc={addTask} />
     </>
   )
+}
+
+TasksList.propTypes = {
+  setTasksCount: PropTypes.func.isRequired
 }
 
 export default TasksList

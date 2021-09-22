@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import { Box } from '@material-ui/core'
@@ -34,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
 
 function App () {
   const classes = useStyles()
+  const [tasksCount, setTasksCount] = useState(0)
 
   return (
     <Grid
@@ -56,11 +57,11 @@ function App () {
                 <Text text="Olá, " size="lg" />
                 <Text text="Bruno" bold size="lg" />
               </Box>
-              <Text text="3 Items" size="sm" />
+              <Text text={(tasksCount ?? '*') + ' Tasks'} size="sm" />
             </Grid>
           </Box>
 
-          <TasksList />
+          <TasksList setTasksCount={setTasksCount} />
         </Box>
 
       </Grid>
