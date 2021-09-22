@@ -19,7 +19,9 @@ const useStyles = makeStyles((theme) => ({
     overflowY: 'scroll',
     display: 'flex',
     flexDirection: 'column-reverse',
-    maxHeight: '100%'
+    minHeight: '100%',
+    maxHeight: '100%',
+    paddingRight: '20px'
   }
 }))
 
