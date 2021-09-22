@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
     color: 'white'
   },
   contentWrapper: {
-    width: '450px',
     backgroundColor: 'rgba(255, 255, 255, 0.92)',
     borderRadius: '3px',
     padding: '15px',
@@ -50,7 +49,7 @@ function App () {
 
       <Grid className={classes.subContainer} item xs>
 
-        <Box className={classes.contentWrapper}>
+        <Box id="content-wrapper" className={classes.contentWrapper}>
           <Box className={classes.header}>
             <Grid container direction="row" justifyContent="space-between" alignItems="center">
               <Box>
