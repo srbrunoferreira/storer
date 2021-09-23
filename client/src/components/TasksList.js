@@ -7,6 +7,8 @@ import axios from 'axios'
 import { getIsoDate } from '../helpers/helpers'
 import { PropTypes } from 'prop-types'
 
+import TaskEdit from './TaskEdit'
+
 const useStyles = makeStyles((theme) => ({
   container: {
     width: '100%',
@@ -29,6 +31,8 @@ const useStyles = makeStyles((theme) => ({
 const TasksList = ({ setTasksCount }) => {
   const style = useStyles()
   const [tasks, setTasks] = useState([])
+  const [showUpdateTask, setShowUpdateTask] = useState(false)
+  const [editingTask, setEditingTask] = useState({})
   const taskListRef = useRef()
 
   useEffect(() =>
@@ -71,14 +75,23 @@ const TasksList = ({ setTasksCount }) => {
       })
   }
 
+  const updateTask = (id, status, text) => {
+    setShowUpdateTask(true)
+    setEditingTask({ id: id, status: status, text: text })
+  }
+
   return (
     <>
       <Box className={style.container}>
         <List className={style.tasksList} ref={taskListRef}>
-          <Task tasks={tasks} deleteTaskFunc={deleteTask} />
+          <Task tasks={tasks} deleteTaskFunc={deleteTask} updateTaskFunc={updateTask} />
         </List>
       </Box>
-      <TaskInput addTaskFunc={addTask} />
+      <TaskInput addTaskFunc={addTask} editTaskFunc={updateTask} />
+      {
+        showUpdateTask &&
+        <TaskEdit {...editingTask} setShowEdit={setShowUpdateTask} />
+      }
     </>
   )
 }

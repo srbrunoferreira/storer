@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const Task = ({ tasks, deleteTaskFunc }) => {
+const Task = ({ tasks, deleteTaskFunc, updateTaskFunc }) => {
   const style = useStyles()
 
   return tasks.map((task, index) => (
@@ -44,7 +44,7 @@ const Task = ({ tasks, deleteTaskFunc }) => {
       />
       <ListItemIcon className={style.iconsContainer}>
         <DeleteIcon className={style.icon} onClick={() => deleteTaskFunc(task._id)} />
-        <EditIcon className={style.icon} />
+        <EditIcon className={style.icon} onClick={() => updateTaskFunc(task._id, task.status, task.text)} />
       </ListItemIcon>
     </ListItem>
   ))
@@ -52,7 +52,8 @@ const Task = ({ tasks, deleteTaskFunc }) => {
 
 Task.propTypes = {
   tasks: PropTypes.array.isRequired,
-  deleteTaskFunc: PropTypes.func.isRequired
+  deleteTaskFunc: PropTypes.func.isRequired,
+  updateTaskFunc: PropTypes.func.isRequired
 }
 
 export default Task
