@@ -7,6 +7,8 @@ import axios from 'axios'
 import { getIsoDate } from '../helpers/helpers'
 import { PropTypes } from 'prop-types'
 
+import FadeIn from 'react-fade-in'
+
 import TaskEdit from './TaskEdit'
 
 const useStyles = makeStyles((theme) => ({
@@ -103,7 +105,9 @@ const TasksList = ({ setTasksCount }) => {
     <>
       <Box className={style.container}>
         <List className={style.tasksList} ref={taskListRef}>
-          <Task tasks={tasks} deleteTaskFunc={deleteTask} showUpdateTaskView={showUpdateTaskView} />
+          <FadeIn>
+            <Task tasks={tasks} deleteTaskFunc={deleteTask} showUpdateTaskView={showUpdateTaskView} />
+          </FadeIn>
         </List>
       </Box>
       <TaskInput addTaskFunc={addTask} />
