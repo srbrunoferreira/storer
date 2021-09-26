@@ -87,7 +87,7 @@ const TasksList = ({ setTasksCount }) => {
           <Task tasks={tasks} deleteTaskFunc={deleteTask} showUpdateTaskView={showUpdateTaskView} />
         </List>
       </Box>
-      <TaskInput addTaskFunc={addTask} editTaskFunc={updateTask} />
+      <TaskInput addTaskFunc={addTask} />
       {
         showUpdateTask &&
         <TaskEdit {...editingTask} setShowEdit={setShowUpdateTask} />
