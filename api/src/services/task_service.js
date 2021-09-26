@@ -19,4 +19,8 @@ export const serviceDeleteTask = async (taskId) => {
   return true
 }
 
+export const serviceUpdateTask = async (taskId, data) => {
+  return await Task.findByIdAndUpdate(taskId, data)
+}
+
 export default { serviceCreateTask }

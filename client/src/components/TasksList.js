@@ -80,6 +80,25 @@ const TasksList = ({ setTasksCount }) => {
     setEditingTask({ id: id, status: status, text: text })
   }
 
+  const updateTask = (id, status, text) => {
+    setShowUpdateTask(false)
+    axios({
+      method: 'PUT',
+      url: 'http://localhost:3000/tasks/' + id,
+      data: { status: status, text: text }
+    })
+      .then(() => {
+        tasks.forEach((task, index) => {
+          if (task._id === id) {
+            tasks[index].text = text
+            tasks[index].status = status
+
+            setTasks([...tasks])
+          }
+        })
+      })
+  }
+
   return (
     <>
       <Box className={style.container}>
@@ -90,7 +109,7 @@ const TasksList = ({ setTasksCount }) => {
       <TaskInput addTaskFunc={addTask} />
       {
         showUpdateTask &&
-        <TaskEdit {...editingTask} setShowEdit={setShowUpdateTask} />
+        <TaskEdit {...editingTask} setShowEdit={setShowUpdateTask} updateTask={updateTask} />
       }
     </>
   )

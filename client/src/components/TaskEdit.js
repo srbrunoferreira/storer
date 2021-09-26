@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid, TextField } from '@material-ui/core'
 import { PropTypes } from 'prop-types'
@@ -24,8 +24,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const TaskEdit = ({ id, status, text, setShowEdit }) => {
+const TaskEdit = ({ id, status, text, setShowEdit, updateTask }) => {
   const style = useStyles()
+  const [newText, setNewText] = useState(text)
 
   return (
     <Grid
@@ -43,14 +44,15 @@ const TaskEdit = ({ id, status, text, setShowEdit }) => {
       >
         <h2>Editar task</h2>
         <Grid item>
-          <SaveIcon className={style.icons} titleAccess="Salvar" style={{ marginRight: '5px' }} onClick={() => setShowEdit(false)} htmlColor="#6b58f3" />
+          <SaveIcon className={style.icons} titleAccess="Salvar" style={{ marginRight: '5px' }} onClick={() => updateTask(id, status, newText)} htmlColor="#6b58f3" />
           <CloseIcon className={style.icons} titleAccess="Fechar" onClick={() => setShowEdit(false)} htmlColor="#6b58f3" />
         </Grid>
       </Grid>
       <TextField
         label="Editar texto"
         variant="standard"
-        defaultValue={text}
+        onChange={(event) => setNewText(event.target.value)}
+        value={newText}
         multiline
         maxRows={5}
         minRows={5}
@@ -63,7 +65,8 @@ TaskEdit.propTypes = {
   id: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
-  setShowEdit: PropTypes.func.isRequired
+  setShowEdit: PropTypes.func.isRequired,
+  updateTask: PropTypes.func.isRequired
 }
 
 export default TaskEdit

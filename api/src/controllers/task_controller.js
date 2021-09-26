@@ -1,6 +1,6 @@
 'use strict'
 
-import { serviceCreateTask, serviceDeleteTask, serviceGetTasks } from '../services/task_service.js'
+import { serviceCreateTask, serviceDeleteTask, serviceGetTasks, serviceUpdateTask } from '../services/task_service.js'
 import ValidationContract from '../validators/fluent-validator.js'
 
 export const getTasks = (req, res) => {
@@ -64,5 +64,16 @@ export const deleteTask = (req, res) => {
       })
   } catch (err) {
     res.status(500).send({ msg: 'Ocorreu um erro e a task não pôde ser deletada.', error: err })
+  }
+}
+
+export const updateTask = (req, res) => {
+  try {
+    serviceUpdateTask(req.params.id, req.body)
+      .then((serviceRes) => {
+        res.status(200).send({ msg: 'Dados da task atualizados com sucesso.', res: serviceRes })
+      })
+  } catch (err) {
+    res.status(500).send({ msg: 'Ocorreu um erro e a task não pôde ser editada.', err: err })
   }
 }
