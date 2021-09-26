@@ -1,16 +1,13 @@
-# storer
+# storer | deploy version
 #### Adjustments and improvements
 
 This project is still under development and will receive more features and improvements in the next versions that will focus on:
-
-- [ ] Axios global settings
-  - [ ] https://github.com/axios/axios#config-defaults
-  - [ ] https://stackoverflow.com/a/51795582/14839095
 
 # Functionalities
 
 * Create task
 * Delete task
+* Edit task
 
 # Front-end
 
