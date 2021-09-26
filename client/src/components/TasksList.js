@@ -30,6 +30,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
+const baseUrl = 'http://localhost:3000/tasks/'
+
 const TasksList = ({ setTasksCount }) => {
   const style = useStyles()
   const [tasks, setTasks] = useState([])
@@ -39,9 +41,9 @@ const TasksList = ({ setTasksCount }) => {
 
   useEffect(() =>
     (async () => {
-      await axios('http://localhost:3000/tasks')
+      await axios(baseUrl)
         .then(res => {
-          setTasks(res.data.tasks.reverse())
+          setTasks(res.data.tasks)
           setTasksCount(res.data.tasks.length)
         })
     })()
@@ -54,13 +56,13 @@ const TasksList = ({ setTasksCount }) => {
 
     axios({
       method: 'POST',
-      url: 'http://localhost:3000/tasks',
+      url: baseUrl,
       headers: { 'Content-Type': 'application/json' },
       data: newTask
     })
       .then(res => {
         newTask._id = res.data.id
-        setTasks([newTask, ...tasks])
+        setTasks([...tasks, newTask])
         setTasksCount(tasks.length + 1)
       })
       .catch(err => console.log(err))
@@ -69,7 +71,7 @@ const TasksList = ({ setTasksCount }) => {
   const deleteTask = (taskId) => {
     axios({
       method: 'DELETE',
-      url: 'http://localhost:3000/tasks/' + taskId
+      url: baseUrl + taskId
     })
       .then(() => {
         setTasks([...tasks].filter(task => task._id !== taskId))
@@ -86,7 +88,7 @@ const TasksList = ({ setTasksCount }) => {
     setShowUpdateTask(false)
     axios({
       method: 'PUT',
-      url: 'http://localhost:3000/tasks/' + id,
+      url: baseUrl + id,
       data: { status: status, text: text }
     })
       .then(() => {
