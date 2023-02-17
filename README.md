@@ -2,8 +2,6 @@
 
 ![Interface](print.png)
 
-#### Adjustments and improvements
-
 # Functionalities
 
 * Create task
